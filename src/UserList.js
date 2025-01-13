@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 // 마운트 : 컴포넌트가 나타남을 의미
-function User({ user, onRemove, onToggle }) {
+const User = React.memo(function User({ user, onRemove, onToggle }) {
   // user을 반복해서 사용하고 싶지 않을 때 
   const { username, email, id, active } = user;
   // useEffect(() => {
@@ -19,11 +19,9 @@ function User({ user, onRemove, onToggle }) {
 
   useEffect(()=> {
     console.log('user 값이 설정됨');
-    //console.log(user);
     return () => {
       console.log('user 값이 바뀌기 전');
-      //console.log(user);
-    }
+    };
   }, []);
   return (
     <div>
@@ -45,7 +43,7 @@ function User({ user, onRemove, onToggle }) {
       <button onClick={() => onRemove(id)}>삭제</button>
     </div>
   );
-};
+});
 
 function UserList({ users, onRemove, onToggle }) {
   return (
@@ -67,5 +65,5 @@ function UserList({ users, onRemove, onToggle }) {
   );
 };
 
-export default UserList;
+export default React.memo(UserList);
 
